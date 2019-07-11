@@ -1,0 +1,37 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Koha: Availability Unpaywall Plugin: Configuration</title>
+<link rel="stylesheet" type="text/css" href="[% PLUGIN_PATH %]/illavailability.css"></link>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; ILL availability Unpaywall &rsaquo; Configuration</div>
+
+<div id="doc3">
+    <h3 id="ill_avail_config_h3">Koha: ILL availability Unpaywall: Configuration</h3>
+
+    <form id="ill_avail_configure" method="get">
+        <input type="hidden" name="class" value="[% CLASS %]"/>
+        <input type="hidden" name="method" value="[% METHOD %]"/>
+        <div id="ill_avail_unpaywall_email">
+            <label for="ill_avail_unpaywall_email">Email address to append to API requests: </label><input id="ill_avail_email_input" placeholder="me@nowhere.com" type="email" name="ill_avail_unpaywall_email" value="[% config.ill_avail_unpaywall_email %]">
+            <p>All calls to the Unpaywall API <a href="https://unpaywall.org/products/api" target="_blank">must contain an email address</a>, please supply one here.</p>
+        </div>
+        <input type="hidden" name="save" value="1" />
+        <input type="submit" value="Save configuration" />
+    </form>
+
+    <hr/>
+
+    <div>
+        <h5>Upgrade status</h5>
+        [% IF last_upgraded %]
+            Plugin was last upgraded on this system on [% last_upgraded | $KohaDates with_hours => 1 %]
+        [% ELSE %]
+            Plugin has never been upgraded.
+        [% END %]
+    </div>
+
+[% INCLUDE 'intranet-bottom.inc' %]
