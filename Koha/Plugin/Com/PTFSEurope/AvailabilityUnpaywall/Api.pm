@@ -84,6 +84,7 @@ sub search {
             status => 200,
             openapi => {
                 results => {
+                    source_url => 'https://unpaywall.org/products/simple-query-tool',
                     search_results => $to_send,
                     errors => []
                 }
