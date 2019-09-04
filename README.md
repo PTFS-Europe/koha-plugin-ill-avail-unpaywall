@@ -23,7 +23,7 @@ This plugin is intended to be a "reference" example of how to create an availabi
 The code is reasonably well commented, however here are some highlights:
 
 `ill_availability_services`
-This method is required. It receives all the metadata pertaining to the item being requested. Metadata should conform to the property names [specified here](https://github.com/PTFS-Europe/koha-ill-freeform/blob/master/Base.pm#L890-L924) The job of this method is to determine if this plugin can service the requested metadata, i.e. does the service being represented support the supplied metadata, is the plugin correctly configured? If not, the method should return `0`. If it can, the method should return a hashref containing:
+This method is required. It receives all the metadata pertaining to the item being requested. Metadata should conform to the property names [in the _get_core_fields function here](https://github.com/PTFS-Europe/koha-ill-freeform/blob/master/Base.pm) The job of this method is to determine if this plugin can service the requested metadata, i.e. does the service being represented support the supplied metadata, is the plugin correctly configured? If not, the method should return `0`. If it can, the method should return a hashref containing:
 * `id` - A unique ID for this service
 * `plugin` - The name of this plugin, suitable for display
 * `endpoint` - The URL of the API route being provided by this plugin to allow searching of the service. This endpoint is handled by the Api.pm module in your plugin.
