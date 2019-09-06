@@ -1,13 +1,22 @@
 #ill_avail_config_h3 {
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
-#ill_avail_unpaywall_email {
+#ill_avail_configure {
+    display: block;
+    margin: 20px;
+}
+
+.ill_avail_config_field {
     padding: 20px 10px;
     margin: 20px 0;
     background: #eee;
     border-radius: 10px;
     list-style: none;
+}
+
+#ill_avail_upgrade {
+    margin: 20px;
 }
 
 input#ill_avail_email_input {

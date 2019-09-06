@@ -15,7 +15,7 @@
     <form id="ill_avail_configure" method="get">
         <input type="hidden" name="class" value="[% CLASS %]"/>
         <input type="hidden" name="method" value="[% METHOD %]"/>
-        <div id="ill_avail_unpaywall_email">
+        <div id="ill_avail_unpaywall_email" class="ill_avail_config_field">
             <label for="ill_avail_unpaywall_email">Email address to append to API requests: </label><input id="ill_avail_email_input" placeholder="me@nowhere.com" type="email" name="ill_avail_unpaywall_email" value="[% config.ill_avail_unpaywall_email %]">
             <p>All calls to the Unpaywall API <a href="https://unpaywall.org/products/api" target="_blank">must contain an email address</a>, please supply one here.</p>
         </div>
@@ -25,7 +25,7 @@
 
     <hr/>
 
-    <div>
+    <div id="ill_avail_upgrade">
         <h5>Upgrade status</h5>
         [% IF last_upgraded %]
             Plugin was last upgraded on this system on [% last_upgraded | $KohaDates with_hours => 1 %]
