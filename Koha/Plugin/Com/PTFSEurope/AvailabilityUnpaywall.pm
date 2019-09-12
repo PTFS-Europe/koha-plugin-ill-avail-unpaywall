@@ -48,7 +48,7 @@ sub new {
 # Recieve a hashref containing the submitted metadata
 # and, if we can work with it, return a hashref of our service definition
 sub ill_availability_services {
-    my ($self, $search_metadata) = @_;
+    my ($self, $params) = @_;
 
     # A list of metadata properties we're interested in
     my $properties = [ 'doi' ];
@@ -57,8 +57,8 @@ sub ill_availability_services {
     my $can_service = 0;
     foreach my $property(@{$properties}) {
         if (
-            $search_metadata->{$property} &&
-            length $search_metadata->{$property} > 0
+            $params->{metadata}->{$property} &&
+            length $params->{metadata}->{$property} > 0
         ) {
             $can_service++;
         }
@@ -72,8 +72,15 @@ sub ill_availability_services {
         $can_service++;
     }
 
+    # Can we display our results in this UI context
+    my $ui_context = $params->{ui_context};
+    if ($conf->{"ill_avail_unpaywall_display_${ui_context}"}) {
+        $can_service++;
+    }
+
+
     # Bail out if we can't do anything with this request
-    return 0 if $can_service < 2;
+    return 0 if $can_service < 3;
 
     my $endpoint = '/api/v1/contrib/' . $self->api_namespace .
         '/ill_availability_search_unpaywall?metadata=';
@@ -123,14 +130,14 @@ sub configure {
         $self->output_html( $template->output() );
     }
     else {
-		my %blacklist = ('save' => 1, 'class' => 1, 'method' => 1);
+        my %blacklist = ('save' => 1, 'class' => 1, 'method' => 1);
         my $hashed = { map { $_ => (scalar $cgi->param($_))[0] } $cgi->param };
         my $p = {};
-		foreach my $key (keys %{$hashed}) {
+        foreach my $key (keys %{$hashed}) {
            if (!exists $blacklist{$key}) {
                $p->{$key} = $hashed->{$key};
            }
-		}
+        }
         $self->store_data({ avail_config => scalar encode_json($p) });
         print $cgi->redirect(-url => '/cgi-bin/koha/plugins/run.pl?class=Koha::Plugin::Com::PTFSEurope::AvailabilityUnpaywall&method=configure');
         exit;
