@@ -16,12 +16,12 @@
         <input type="hidden" name="class" value="[% CLASS %]"/>
         <input type="hidden" name="method" value="[% METHOD %]"/>
         <div id="ill_avail_unpaywall_email" class="ill_avail_config_field">
-            <label for="ill_avail_unpaywall_email">Email address to append to API requests: </label>
+            <label for="ill_avail_email_input">Email address to append to API requests: </label>
             <input id="ill_avail_email_input" placeholder="me@nowhere.com" type="email" name="ill_avail_unpaywall_email" value="[% config.ill_avail_unpaywall_email %]">
             <p>All calls to the Unpaywall API <a href="https://unpaywall.org/products/api" target="_blank">must contain an email address</a>, please supply one here.</p>
         </div>
         <div id="ill_avail_display_opac" class="ill_avail_config_field">
-            <label for="ill_avail_unpaywall_display_opac">Display results in OPAC: </label>
+            <label for="ill_avail_display_opac_input">Display results in OPAC: </label>
             [% IF config.ill_avail_unpaywall_display_opac %]
                 <input type="checkbox" id="ill_avail_display_opac_input" name="ill_avail_unpaywall_display_opac" value="y" checked>
             [% ELSE %]
@@ -30,7 +30,7 @@
             <p>Should results from this plugin be displayed when a user in the OPAC initiates request creation?</p>
         </div>
         <div id="ill_avail_display_staff" class="ill_avail_config_field">
-            <label for="ill_avail_unpaywall_display_staff">Display results in staff interface: </label>
+            <label for="ill_avail_display_staff_input">Display results in staff interface: </label>
             [% IF config.ill_avail_unpaywall_display_staff %]
                 <input type="checkbox" id="ill_avail_display_staff_input" name="ill_avail_unpaywall_display_staff" value="y" checked>
             [% ELSE %]
