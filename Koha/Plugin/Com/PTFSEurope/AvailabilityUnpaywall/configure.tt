@@ -15,6 +15,11 @@
     <form id="ill_avail_configure" method="get">
         <input type="hidden" name="class" value="[% CLASS %]"/>
         <input type="hidden" name="method" value="[% METHOD %]"/>
+        <div id="ill_avail_unpaywall_name" class="ill_avail_config_field">
+            <label for="ill_avail_name_input">Display name: </label>
+            <input id="ill_avail_name_input" placeholder="Unpaywall" type="text" name="ill_avail_unpaywall_name" value="[% config.ill_avail_unpaywall_name || 'Unpaywall' %]">
+            <p>The text that is displayed in the user interface above search results from Unpaywall</p>
+        </div>
         <div id="ill_avail_unpaywall_email" class="ill_avail_config_field">
             <label for="ill_avail_email_input">Email address to append to API requests: </label>
             <input id="ill_avail_email_input" placeholder="me@nowhere.com" type="email" name="ill_avail_unpaywall_email" value="[% config.ill_avail_unpaywall_email %]">
