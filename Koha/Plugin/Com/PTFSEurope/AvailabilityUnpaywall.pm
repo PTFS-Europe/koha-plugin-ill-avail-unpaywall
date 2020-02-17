@@ -41,6 +41,7 @@ sub new {
     my $self = $class->SUPER::new($args);
 
     $self->{schema} = Koha::Database->new()->schema();
+    $self->{config} = decode_json($self->retrieve_data('avail_config') || '{}');
 
     return $self;
 }
@@ -65,8 +66,7 @@ sub ill_availability_services {
     }
 
     # Do we have a configured email address
-    my $conf = decode_json($self->retrieve_data('avail_config') || '{}');
-    my $email = $conf->{ill_avail_unpaywall_email};
+    my $email = $self->{config}->{ill_avail_unpaywall_email};
     $email =~ s/^\s+|\s+$//g;
     if ($email || length $email > 0) {
         $can_service++;
@@ -74,7 +74,7 @@ sub ill_availability_services {
 
     # Can we display our results in this UI context
     my $ui_context = $params->{ui_context};
-    if ($conf->{"ill_avail_unpaywall_display_${ui_context}"}) {
+    if ($self->{config}->{"ill_avail_unpaywall_display_${ui_context}"}) {
         $can_service++;
     }
 
@@ -122,9 +122,8 @@ sub configure {
     unless ( $cgi->param('save') ) {
 
         my $template = $self->get_template({ file => 'configure.tt' });
-        my $conf = $self->retrieve_data('avail_config') || '{}';
         $template->param(
-            config => scalar decode_json($conf)
+            config => $self->{config}
         );
 
         $self->output_html( $template->output() );
